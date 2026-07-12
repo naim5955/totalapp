@@ -88,7 +88,7 @@ if not st.session_state['authenticated']:
             st.markdown("<br>", unsafe_allow_html=True)
             
         st.header("Port Login")
-        st.subheader("FrontDesk Bangladesh Ltd")
+        st.subheader("LafargeHolcim Bangladesh PLC")
         
         user_id = st.text_input("User ID (TSE01 to TSE10)", key="sys_uid").strip().upper()
         password = st.text_input("Password", type="password", key="sys_pwd")
@@ -170,7 +170,7 @@ elif st.session_state['current_page'] == "TCO":
         lh_premium_price = st.number_input("Holcim Premium Price (per Bag)", min_value=400, value=680, step=10, key="tco_p_pr")
     with col_t2:
         paint_price_sqft = st.number_input("Paint & Putty Cost (per Sq. Ft.)", min_value=5, value=35, step=5, key="tco_p_sq")
-        repair_labor_sqft = st.number_input("Scraping Labor Cost (per Sq. Ft.)", min_value=5, value=65, step=5, key="tco_l_sq")
+        repair_labor_sqft = st.number_input("Scraping Labor Cost (per Sq. Ft.)", min_value=5, value=5, step=5, key="tco_l_sq")
         
     failure_years = st.slider("Projected Dampness Failure Event Horizon (Years)", min_value=2, max_value=10, value=5, key="tco_fail_y")
     
