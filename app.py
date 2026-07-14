@@ -168,9 +168,9 @@ elif st.session_state['current_page'] == "TCO":
     with col_t1:
         local_brand_price = st.number_input("Local Cement Price (per Bag)", min_value=300, value=560, step=10, key="tco_l_pr")
         lh_premium_price = st.number_input("Holcim Premium Price (per Bag)", min_value=400, value=680, step=10, key="tco_p_pr")
-        sand_price_cft = st.number_input("Sand Market Price (per CFT)", min_value=10, value=45, step=5, key="tco_s_pr")
+        sand_price_cft = st.number_input("Sand Market Price (per CFT)", min_value=10, value=40, step=5, key="tco_s_pr")
     with col_t2:
-        initial_paint_sqft = st.number_input("Initial Paint & Putty Cost (per Sq. Ft.)", min_value=10, value=75, step=5, key="tco_p_sq")
+        initial_paint_sqft = st.number_input("Initial Paint & Putty Cost (per Sq. Ft.)", min_value=10, value=35, step=5, key="tco_p_sq")
         failure_years = st.slider("Projected Dampness in (Years)", min_value=2, max_value=10, value=5, key="tco_fail_y")
     
     # Mathematical Modeling Layer
