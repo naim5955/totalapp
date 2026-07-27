@@ -60,6 +60,21 @@ st.markdown("""
     .metric-label { font-size: 12px; color: #6B7280; font-weight: bold; letter-spacing: 0.5px; }
     .metric-value { font-size: 22px; font-weight: 800; color: #111827; }
 
+    /* Custom Streamlit Table Alignment & Uniform Column Spacing */
+    [data-testid="stTable"] table {
+        table-layout: fixed !important;
+        width: 100% !important;
+    }
+    [data-testid="stTable"] th {
+        text-align: center !important;
+        vertical-align: middle !important;
+        font-weight: 700 !important;
+    }
+    [data-testid="stTable"] td {
+        text-align: left !important;
+        vertical-align: middle !important;
+    }
+
     .dev-footer {
         background-color: #F3F4F6; 
         padding: 14px; 
@@ -87,10 +102,9 @@ if not st.session_state['authenticated']:
             st.image(logo_filename, use_container_width=True)
             st.markdown("<br>", unsafe_allow_html=True)
             
-        st.header("আমার বাড়ি App Login")
+        st.header("আমার বাড়ি App Login")
         st.subheader("LafargeHolcim Bangladesh PLC")
-        st.subheader("Developed By LHB Technical Team")    
-        
+        st.markdown("<p style='font-size: 20px;'>Developed By MD. Abdullah Al Naim, AE (Noakhali Area)</p>", unsafe_allow_html=True)
         user_id = st.text_input("User ID (TSE01 to TSE10)", key="sys_uid").strip().upper()
         password = st.text_input("Password", type="password", key="sys_pwd")
         
@@ -129,18 +143,18 @@ st.markdown('<div class="company-header">LafargeHolcim Bangladesh PLC</div>', un
 
 # PAGE A: CENTRAL NAVIGATION PANEL
 if st.session_state['current_page'] == "Dashboard":
-    st.markdown(f'<div class="app-title">আমার বাড়ি Techno-Commercial Suite | Session: {st.session_state["user_id"]}</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="app-title">আমার বাড়ি Techno-Commercial Suite | Session: {st.session_state["user_id"]}</div>', unsafe_allow_html=True)
     st.markdown("---")
     
-    st.subheader("Select Calculation toll")
+    st.subheader("Select Calculation Tool")
     
-    if st.button("📊 Total Cost of Ownership (TCO) & ROI Analyzer", use_container_width=True):
+    if st.button("📊 Total Cost of Ownership (TCO) & ROI (Wall Finishing)", use_container_width=True):
         go_to_page("TCO")
         
     if st.button("🧱 Wall & Ceiling Plaster Calculator", use_container_width=True):
         go_to_page("Plaster")
         
-    if st.button("🏗️ Slab / Column material volume Estimator", use_container_width=True):
+    if st.button("🏗️ Slab / Column Material Volume Estimator", use_container_width=True):
         go_to_page("SlabColumn")
         
     st.markdown("<br><br>", unsafe_allow_html=True)
@@ -150,7 +164,7 @@ if st.session_state['current_page'] == "Dashboard":
 
 # PAGE B: TOTAL COST OF OWNERSHIP LCC ENGINE
 elif st.session_state['current_page'] == "TCO":
-    st.markdown('<div class="app-title">Total Cost of Ownership (TCO) & ROI Lifecycle Analyzer</div>', unsafe_allow_html=True)
+    st.markdown('<div class="app-title">Total Cost of Ownership (TCO) & ROI (Wall Finishing) </div>', unsafe_allow_html=True)
     
     nav_col1, nav_col2 = st.columns(2)
     with nav_col1:
@@ -160,18 +174,18 @@ elif st.session_state['current_page'] == "TCO":
     st.markdown("---")
     
     st.subheader("🏢 Structural Dimensions")
-    floor_size = st.number_input("Floor Footprint Area (Sq. Ft.)", min_value=100, value=2000, step=100, key="tco_f_sz")
+    floor_size = st.number_input("Floor Area (Sq. Ft.)", min_value=100, value=2000, step=100, key="tco_f_sz")
     stories = st.number_input("Number of Stories", min_value=1, value=5, step=1, key="tco_st_n")
     
-    st.subheader("Input unit Pricing (BDT)")
+    st.subheader("Enter Unit Pricing (BDT)")
     col_t1, col_t2 = st.columns(2)
     with col_t1:
-        local_brand_price = st.number_input("Local Cement Price (per Bag)", min_value=300, value=560, step=10, key="tco_l_pr")
+        local_brand_price = st.number_input("Local Cement Price (per Bag)", min_value=300, value=530, step=5, key="tco_l_pr")
         lh_premium_price = st.number_input("Holcim Premium Price (per Bag)", min_value=400, value=680, step=10, key="tco_p_pr")
-        sand_price_cft = st.number_input("Sand Market Price (per CFT)", min_value=10, value=40, step=5, key="tco_s_pr")
+        sand_price_cft = st.number_input("Sand Price (per CFT)", min_value=10, value=40, step=5, key="tco_s_pr")
     with col_t2:
-        initial_paint_sqft = st.number_input("Initial Paint & Putty Cost (per Sq. Ft.)", min_value=10, value=35, step=5, key="tco_p_sq")
-        failure_years = st.slider("Projected Dampness in (Years)", min_value=2, max_value=10, value=5, key="tco_fail_y")
+        initial_paint_sqft = st.number_input("Initial Painting Cost (per Sq. Ft.)", min_value=10, value=35, step=5, key="tco_p_sq")
+        failure_years = st.slider("Projected Dampness in (Years)", min_value=2, max_value=12, value=8, key="tco_fail_y")
     
     # Mathematical Modeling Layer
     ext_area = floor_size * stories * 0.7   
@@ -196,75 +210,97 @@ elif st.session_state['current_page'] == "TCO":
     
     upfront_extra_cost = initial_hwp_total - initial_std_total
     
-    # The 40% Painting Rework Rule application
-    recurring_damage_shock = cost_initial_paint * 0.40
+    # 1/3 Painting Rework Cost Rule
+    recurring_damage_shock = cost_initial_paint / 3.0
     
     lifetime_std_total = initial_std_total + recurring_damage_shock
     lifetime_hwp_total = initial_hwp_total
     
     net_roi_savings = lifetime_std_total - lifetime_hwp_total
     
-    # ROI Percentage calculation
-    roi_percentage = (net_roi_savings / upfront_extra_cost * 100) if upfront_extra_cost > 0 else 0.0
-    
-    # Upfront Extra Cost & ROI Cards
-    st.markdown(f"""
-        <div class="tco-card" style="background-color: #FFFBEB; border-left: 5px solid #F59E0B;">
-            <div class="card-title" style="color: #92400E;">INITIAL PREMIUM INVESTMENT</div>
-            <div class="card-value" style="color: #D97706;">BDT {upfront_extra_cost:,.0f}</div>
-            <div class="card-sub">Premium protection additional cost at Day 1</div>
-        </div>
-        <div class="tco-card" style="background-color: #ECFDF5; border-left: 5px solid #10B981;">
-            <div class="card-title" style="color: #065F46;">NET RETURN ON INVESTMENT (YEAR {failure_years})</div>
-            <div class="card-value" style="color: #047857;">BDT {net_roi_savings:,.0f} ({roi_percentage:,.1f}%)</div>
-            <div class="card-sub">Net Return of premium investment</div>
-        </div>
-    """, unsafe_allow_html=True)
-    
-    # Horizontal Comparison Charts (Horizontal Layout Reverted)
-    st.markdown("<br>", unsafe_allow_html=True)
-    fig = go.Figure()
-    fig.add_trace(go.Bar(y=['Traditional Plan', 'Premium Plan'], x=[initial_std_total, initial_hwp_total], name='Initial CapEx Base', orientation='h', marker=dict(color='#3B82F6')))
-    fig.add_trace(go.Bar(y=['Traditional Plan', 'Premium Plan'], x=[recurring_damage_shock, 0], name='40% Paint Repair Shock', orientation='h', marker=dict(color='#EF4444')))
-    
-    fig.update_layout(
-        barmode='stack',
-        height=220,
-        margin=dict(l=10, r=10, t=10, b=10),
-        legend=dict(orientation="h", yanchor="bottom", y=1.1, xanchor="center", x=0.5, font=dict(size=9)),
-        xaxis=dict(title="Total Outflow (BDT)", tickformat=",.0f", tickfont=dict(size=9)),
-        yaxis=dict(tickfont=dict(size=9))
-    )
-    st.plotly_chart(fig, use_container_width=True)
+    # ROI Percentage calculation against upfront extra investment
+    roi_percentage = (net_roi_savings / initial_hwp_total * 100) if initial_hwp_total > 0 else 0.0
 
-    # Detailed Upfront Cost Table
-    st.subheader("⚖️ 1. Initial Investment Comparison Breakdown")
+    # 1. Detailed Breakdown Tables
+    st.markdown("---")
+    st.subheader("⚖️ 1. Initial Investment Comparison")
     initial_comparison_data = {
-        "Cost Element": ["Cement Cost", "Sand Cost", "Initial Paint & Putty Layer", "Total Initial Project Cost"],
+        "Cost Element": ["Cement Cost", "Sand Cost", "Painting", "Total Initial Cost"],
         "Traditional (Local Brand)": [f"BDT {cost_cem_std:,.0f}", f"BDT {cost_sand:,.0f}", f"BDT {cost_initial_paint:,.0f}", f"BDT {initial_std_total:,.0f}"],
-        "Premium (LHB Premium)": [f"BDT {cost_cem_hwp:,.0f}", f"BDT {cost_sand:,.0f}", f"BDT {cost_initial_paint:,.0f}", f"BDT {initial_hwp_total:,.0f}"],
-        "Premium Cost": [f"+ BDT {upfront_extra_cost:,.0f}", "BDT 0", "BDT 0", f"+ BDT {upfront_extra_cost:,.0f}"]
+        "Premium (Holcim Premium)": [f"BDT {cost_cem_hwp:,.0f}", f"BDT {cost_sand:,.0f}", f"BDT {cost_initial_paint:,.0f}", f"BDT {initial_hwp_total:,.0f}"],
+        "Premium Extra Cost": [f"+ BDT {upfront_extra_cost:,.0f}", "BDT 0", "BDT 0", f"+ BDT {upfront_extra_cost:,.0f}"]
     }
     st.table(pd.DataFrame(initial_comparison_data))
 
-    # Comprehensive Lifecycle Cost Table
-    st.subheader(f"⏱️ 2. Lifecycle ROI Breakdown (Year {failure_years})")
+    st.subheader(f"⏱️ 2. Lifecycle ROI (Year {failure_years})")
     lifecycle_data = {
-        "Plan Strategy Options": ["Traditional Local Brand Plan", "Holcim Premium Plan"],
-        "Initial Capital Cost": [f"BDT {initial_std_total:,.0f}", f"BDT {initial_hwp_total:,.0f}"],
-        "Recurring Paint and Damp Proofing Cost": [f"BDT {recurring_damage_shock:,.0f}", "BDT 0 "],
+        "Plan Options": ["Traditional Local Brand Plan", "Holcim Premium Plan"],
+        "Initial Cost": [f"BDT {initial_std_total:,.0f}", f"BDT {initial_hwp_total:,.0f}"],
+        "Re-Paint & Damp Repair Cost": [f"BDT {recurring_damage_shock:,.0f}", "BDT 0"],
         "Total Lifetime Cost": [f"BDT {lifetime_std_total:,.0f}", f"BDT {lifetime_hwp_total:,.0f}"]
     }
     st.table(pd.DataFrame(lifecycle_data))
 
+    # 2. Executive 3-Box Summary Cards
+    st.markdown("---")
+    st.subheader("📈 Summary")
+
+    st.markdown(f"""
+        <div class="tco-card" style="background-color: #F0F9FF; border-left: 5px solid #0284C7;">
+            <div class="card-title" style="color: #0369A1;">TOTAL COST OF OWNERSHIP (HOLCIM PREMIUM)</div>
+            <div class="card-value" style="color: #0284C7;">BDT {lifetime_hwp_total:,.0f}</div>
+            <div class="card-sub">Total initial investment for Holcim Premium plan (Cement + Sand + Paint)</div>
+        </div>
+        
+        <div class="tco-card" style="background-color: #FEF2F2; border-left: 5px solid #EF4444;">
+            <div class="card-title" style="color: #991B1B;">ADDITIONAL COST OF OWNERSHIP (LOCAL BRAND)</div>
+            <div class="card-value" style="color: #DC2626;">BDT {recurring_damage_shock:,.0f}</div>
+            <div class="card-sub">Expected recurring dampness damage & repainting cost by Year {failure_years}.<br><b>** Note: 1/3 of total paint cost is considered as recurring dampness repair cost.</b></div>
+        </div>
+        
+        <div class="tco-card" style="background-color: #ECFDF5; border-left: 5px solid #10B981;">
+            <div class="card-title" style="color: #065F46;">NET SAVINGS (ROI)</div>
+            <div class="card-value" style="color: #047857;">BDT {net_roi_savings:,.0f} ({roi_percentage:,.1f}%)</div>
+            <div class="card-sub">Net lifetime savings against total Holcim Premium plan investment of BDT {initial_hwp_total:,.0f}</div>
+        </div>
+    """, unsafe_allow_html=True)
+
+    # 3. Stacked Comparison Bar Chart
+    st.markdown("<br>", unsafe_allow_html=True)
+    fig = go.Figure()
+    fig.add_trace(go.Bar(
+        y=['Traditional Plan', 'Premium Plan'], 
+        x=[initial_std_total, initial_hwp_total], 
+        name='Initial CapEx Base', 
+        orientation='h', 
+        marker=dict(color='#3B82F6')
+    ))
+    fig.add_trace(go.Bar(
+        y=['Traditional Plan', 'Premium Plan'], 
+        x=[recurring_damage_shock, 0], 
+        name='1/3 Paint Repair Cost', 
+        orientation='h', 
+        marker=dict(color='#EF4444')
+    ))
+    
+    fig.update_layout(
+        barmode='stack',
+        height=240,
+        margin=dict(l=10, r=10, t=10, b=10),
+        legend=dict(orientation="h", yanchor="bottom", y=1.1, xanchor="center", x=0.5, font=dict(size=10)),
+        xaxis=dict(title="Total Outflow (BDT)", tickformat=",.0f", tickfont=dict(size=9)),
+        yaxis=dict(tickfont=dict(size=10))
+    )
+    st.plotly_chart(fig, use_container_width=True)
+
     with st.expander("🔍 Deep Technical Engineering Log"):
         st.markdown(f"""
         ### Plaster and Paint Surface Areas
-        * **Internal Wall Area:** Calculated as {int_area:,.0f} Sq. Ft. (based on 2.8x floor area per story).
-        * **External Wall Area:** Calculated as {ext_area:,.0f} Sq. Ft. (based on 0.7x floor area per story).
-        * **Total Wall Plaster Skin Area:** Combined internal and external wall surface area is {total_wall_area:,.0f} Sq. Ft.
-        * **Total Cement Bags Required:** Sum of internal plaster, external plaster, and roof screed bag requirements totals {t_bags:,} bags.
-        * **Sand Required:** Plaster sand requirements total {t_sand_cft:,.1f} CFT (calculated using the 1:4 layout ratio of 5 CFT of sand per bag of cement).
+        * **Internal Wall Area:** {int_area:,.0f} Sq. Ft. (2.8x floor area per story).
+        * **External Wall Area:** {ext_area:,.0f} Sq. Ft. (0.7x floor area per story).
+        * **Total Wall Plaster Surface Area:** {total_wall_area:,.0f} Sq. Ft.
+        * **Total Cement Bags Required:** {t_bags:,} bags.
+        * **Sand Required:** {t_sand_cft:,.1f} CFT
         """)
 
 # PAGE C: WALL & ROOF PLASTER MATERIAL QUANTIFICATION
@@ -339,12 +375,12 @@ elif st.session_state['current_page'] == "Plaster":
         st.markdown(f"""
         ### Material Calculation Details
         * **Dry Plaster Volume:** Total dry plaster mix required for all areas is {total_dry_volume_all:,.1f} CFT.
-        * **Cement Component:** Calculated as {total_cement_cft:,.1f} CFT based on 1 part of the 1:{s_ratio} mix ratio.
-        * **Sand Component:** Calculated as {total_sand_cft:,.1f} CFT based on {s_ratio} parts of the 1:{s_ratio} mix ratio.
-        * **Total Plaster Bags Required:** Total cement volume divided by standard bag volume yields {total_plaster_bags:,} bags.
+        * **Cement Component:**  {total_cement_cft:,.1f} CFT based on 1 part of the 1:{s_ratio} mix ratio.
+        * **Sand Component:** {total_sand_cft:,.1f} CFT based on {s_ratio} parts of the 1:{s_ratio} mix ratio.
+        * **Total Plaster Bags Required:** {total_plaster_bags:,} bags.
         """)
 
-# PAGE D: STRUCTURAL ELEMENTS STRUCTURAL COMPUTATION
+# PAGE D: STRUCTURAL ELEMENTS COMPUTATION
 elif st.session_state['current_page'] == "SlabColumn":
     st.markdown('<div class="app-title">Column/Slab Materials Volume Calculation</div>', unsafe_allow_html=True)
     
@@ -410,7 +446,7 @@ elif st.session_state['current_page'] == "SlabColumn":
 
     elif el_choice == "Slab & Beam":
         st.subheader("📐 Slab Dimensions")
-        s_area = st.number_input("Floor  Area (Sq. Ft.)", min_value=100, value=2000, step=100, key="sb_a")
+        s_area = st.number_input("Floor Area (Sq. Ft.)", min_value=100, value=2000, step=100, key="sb_a")
         s_thick = st.number_input("Slab Thickness (Inches)", min_value=1.0, value=5.0, step=0.5, key="sb_t")
         
         b_profile = st.radio("Select Beam Profile Style:", ["Concealed Beam", "Normal Hanging Beam"], horizontal=True)
@@ -452,12 +488,12 @@ elif st.session_state['current_page'] == "SlabColumn":
         with st.expander("🔍 Volumetric Calculations Details"):
             st.markdown(f"""
             ### Slab and Beam Concrete Material Details
-            * **Effective Slab Thickness:** Effective height of slab casting is {eff_thick:.2f} Inches.
+            * **Effective Slab Thickness:**  {eff_thick:.2f} Inches.
             * **Total Wet Concrete Volume:** Floor Area × (Slab Thickness / 12) = {s_wet:.2f} CFT.
             * **Total Dry Concrete Volume:** Wet volume multiplied by standard 1.54 concrete shrinkage multiplier yields {s_dry:.2f} CFT.
-            * **Cement Component:** Calculated as {s_cement_cft:,.1f} CFT based on 1 part of the 1:{ssand}:{sagg} mix ratio.
-            * **Sand Component:** Calculated as {s_sand_cft:,.1f} CFT based on {ssand} parts of the mix.
-            * **Aggregate Component:** Calculated as {s_agg_cft:,.1f} CFT based on {sagg} parts of the mix.
+            * **Cement Component:**  {s_cement_cft:,.1f} CFT based on 1 part of the 1:{ssand}:{sagg} mix ratio.
+            * **Sand Component:** {s_sand_cft:,.1f} CFT based on {ssand} parts of the mix.
+            * **Aggregate Component:** {s_agg_cft:,.1f} CFT based on {sagg} parts of the mix.
             """)
 
 # --- GLOBAL SYSTEM FOOTER BANNER ---
