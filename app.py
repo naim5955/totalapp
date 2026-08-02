@@ -9,80 +9,144 @@ logo_filename = "logo.png"
 
 # --- SYSTEM WIDE CONFIGURATION ---
 st.set_page_config(
-    page_title="Techno Commercial Suite Portal",
+    page_title="Techno Commercial Suite | LafargeHolcim",
     page_icon="🏗️",
     layout="centered"
 )
 
-# --- GLOBAL DESIGN SYSTEM & MOBILE RESPONSIVE STYLES ---
+# --- ADVANCED EXECUTIVE DESIGN SYSTEM & STYLES ---
 st.markdown("""
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    
     html, body, [data-testid="stAppViewContainer"] {
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
+        background-color: #F8FAFC !important;
         padding: 4px !important;
     }
-    .company-header { 
-        font-size: 24px !important; 
+    
+    /* Centered Header Container */
+    .hero-header-box {
+        text-align: center !important;
+        background: #FFFFFF;
+        padding: 20px 15px 15px 15px;
+        border-radius: 16px;
+        border: 1px solid #E2E8F0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        margin-bottom: 20px;
+    }
+    
+    .company-header-centered { 
+        font-size: 26px !important; 
         font-weight: 800; 
         color: #DC2626; 
+        letter-spacing: -0.5px;
+        margin-top: 10px;
         margin-bottom: 2px;
         line-height: 1.2;
+        text-align: center !important;
     }
-    .app-title {
-        font-size: 16px !important;
+    .app-title-centered {
+        font-size: 14px !important;
         font-weight: 600;
-        color: #4B5563;
-        margin-bottom: 15px;
+        color: #64748B;
+        text-align: center !important;
+        margin-bottom: 5px;
         line-height: 1.3;
     }
-    .stNumberInput input, .stSelectbox div {
-        font-size: 16px !important; 
-        padding: 8px !important;
-    }
-    .tco-card {
-        padding: 14px;
-        border-radius: 8px;
-        margin-bottom: 10px;
-        border: 1px solid #E5E7EB;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    }
-    .card-title { font-size: 11px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 4px; }
-    .card-value { font-size: 20px; font-weight: 800; }
-    .card-sub { font-size: 11px; color: #4B5563; margin-top: 2px; }
-    
-    .mobile-metric-card {
-        background-color: #F9FAFB;
-        padding: 16px;
-        border-radius: 8px;
-        border-left: 5px solid #2563EB;
-        margin-top: 15px;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    }
-    .metric-label { font-size: 12px; color: #6B7280; font-weight: bold; letter-spacing: 0.5px; }
-    .metric-value { font-size: 22px; font-weight: 800; color: #111827; }
 
-    /* Custom Streamlit Table Alignment & Uniform Column Spacing */
-    [data-testid="stTable"] table {
-        table-layout: fixed !important;
-        width: 100% !important;
+    /* Executive Cards with Lift & Gradient Accents */
+    .tco-card {
+        padding: 18px;
+        border-radius: 14px;
+        margin-bottom: 14px;
+        background: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+        transition: all 0.25s ease-in-out;
     }
-    [data-testid="stTable"] th {
+    .tco-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 20px -4px rgba(0, 0, 0, 0.08);
+    }
+    .card-title { font-size: 11px; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 6px; }
+    .card-value { font-size: 22px; font-weight: 800; }
+    .card-sub { font-size: 12px; color: #64748B; margin-top: 4px; line-height: 1.4; }
+    
+    /* Grid KPI Cards */
+    .mobile-metric-card {
+        background-color: #FFFFFF;
+        padding: 18px;
+        border-radius: 14px;
+        border: 1px solid #E2E8F0;
+        border-left: 6px solid #2563EB;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        transition: transform 0.2s ease;
+    }
+    .mobile-metric-card:hover { transform: translateY(-2px); }
+    .metric-label { font-size: 11px; color: #64748B; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+    .metric-value { font-size: 22px; font-weight: 800; color: #0F172A; margin-top: 2px; }
+
+    /* Custom Tables */
+    .custom-tco-table {
+        width: 100% !important;
+        table-layout: fixed !important;
+        border-collapse: separate !important;
+        border-spacing: 0 !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        border: 1px solid #E2E8F0 !important;
+        margin-bottom: 12px !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.02) !important;
+    }
+    .custom-tco-table th {
         text-align: center !important;
         vertical-align: middle !important;
         font-weight: 700 !important;
+        padding: 12px 10px !important;
+        background-color: #F1F5F9 !important;
+        color: #334155 !important;
+        border-bottom: 1px solid #E2E8F0 !important;
+        font-size: 12px !important;
     }
-    [data-testid="stTable"] td {
-        text-align: left !important;
+    .custom-tco-table td {
+        text-align: right !important;
         vertical-align: middle !important;
+        padding: 12px 10px !important;
+        border-bottom: 1px solid #F1F5F9 !important;
+        background-color: #FFFFFF !important;
+        font-size: 13px !important;
+        color: #1E293B !important;
+    }
+    .custom-tco-table tr:hover td {
+        background-color: #F8FAFC !important;
+    }
+    .custom-tco-table td:first-child {
+        text-align: left !important;
+        font-weight: 600 !important;
     }
 
-    .dev-footer {
-        background-color: #F3F4F6; 
-        padding: 14px; 
-        border-radius: 6px; 
-        border-left: 4px solid #DC2626;
-        margin-top: 30px;
+    /* Buttons */
+    div.stButton > button {
+        border-radius: 10px !important;
+        font-weight: 600 !important;
+        padding: 10px 16px !important;
+        transition: all 0.2s ease !important;
     }
-    .signature-box { font-size: 13px; color: #6B7280; line-height: 1.4; border-top: 1px solid #E5E7EB; padding-top: 10px; margin-top: 20px; }
+
+    /* Footer */
+    .dev-footer {
+        background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+        padding: 18px; 
+        border-radius: 14px; 
+        border: 1px solid #E2E8F0;
+        border-left: 6px solid #DC2626;
+        margin-top: 35px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+    .signature-box { font-size: 13px; color: #64748B; line-height: 1.5; border-top: 1px solid #E2E8F0; padding-top: 12px; margin-top: 20px; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -98,19 +162,22 @@ if not st.session_state['authenticated']:
     col_l, col_login, col_r = st.columns([0.1, 1.0, 0.1])
     
     with col_login:
+        st.markdown('<div class="hero-header-box">', unsafe_allow_html=True)
         if os.path.exists(logo_filename):
-            st.image(logo_filename, use_container_width=True)
-            st.markdown("<br>", unsafe_allow_html=True)
-            
-        st.header("আমার বাড়ি App Login")
-        st.subheader("LafargeHolcim Bangladesh PLC")
-        st.markdown("<p style='font-size: 20px;'>Developed By MD. Abdullah Al Naim, AE (Noakhali Area)</p>", unsafe_allow_html=True)
+            col_l_img, col_m_img, col_r_img = st.columns([1, 2, 1])
+            with col_m_img:
+                st.image(logo_filename, use_container_width=True)
+        st.markdown('<div class="company-header-centered">LafargeHolcim Bangladesh PLC</div>', unsafe_allow_html=True)
+        st.markdown('<div class="app-title-centered">আমার বাড়ি Techno-Commercial Suite</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        st.markdown("<p style='font-size: 14px; color: #475569; font-weight: 600; text-align: center;'>Developed By MD. Abdullah Al Naim, AE (Noakhali Area)</p>", unsafe_allow_html=True)
         user_id = st.text_input("User ID (TSE01 to TSE10)", key="sys_uid").strip().upper()
         password = st.text_input("Password", type="password", key="sys_pwd")
         
         valid_users = [f"TSE{str(i).zfill(2)}" for i in range(1, 11)]
         
-        if st.button("Access Dashboard", use_container_width=True):
+        if st.button("Access Portal Dashboard", use_container_width=True, type="primary"):
             if user_id in valid_users and password == "12121":
                 st.session_state['authenticated'] = True
                 st.session_state['user_id'] = user_id
@@ -133,22 +200,24 @@ def go_to_page(page_name):
     st.session_state['current_page'] = page_name
     st.rerun()
 
-# --- BRANDING BAR TOP LAYER ---
+# --- BRANDING BAR TOP LAYER (CENTERED HERO BOX) ---
+st.markdown('<div class="hero-header-box">', unsafe_allow_html=True)
 if os.path.exists(logo_filename):
-    st.image(logo_filename, width=160)
-
-st.markdown('<div class="company-header">LafargeHolcim Bangladesh PLC</div>', unsafe_allow_html=True)
+    c_l, c_m, c_r = st.columns([1.2, 1, 1.2])
+    with c_m:
+        st.image(logo_filename, width=150)
+st.markdown('<div class="company-header-centered">LafargeHolcim Bangladesh PLC</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="app-title-centered">আমার বাড়ি Techno-Commercial Suite | Session: <b>{st.session_state.get("user_id", "Guest")}</b></div>', unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True)
 
 # --- MAIN ENGINE DISTRIBUTION CENTRE ---
 
 # PAGE A: CENTRAL NAVIGATION PANEL
 if st.session_state['current_page'] == "Dashboard":
-    st.markdown(f'<div class="app-title">আমার বাড়ি Techno-Commercial Suite | Session: {st.session_state["user_id"]}</div>', unsafe_allow_html=True)
+    st.subheader("Select Commercial Suite Calculator")
     st.markdown("---")
     
-    st.subheader("Select Calculation Tool")
-    
-    if st.button("📊 Total Cost of Ownership (TCO) & ROI (Wall Finishing)", use_container_width=True):
+    if st.button("📊 Cost Estimation Calculator (Dampproof Wall)", use_container_width=True):
         go_to_page("TCO")
         
     if st.button("🧱 Wall & Ceiling Plaster Calculator", use_container_width=True):
@@ -162,9 +231,9 @@ if st.session_state['current_page'] == "Dashboard":
         st.session_state['authenticated'] = False
         st.rerun()
 
-# PAGE B: TOTAL COST OF OWNERSHIP LCC ENGINE
+# PAGE B: COST ESTIMATION CALCULATOR (DAMPPROOF WALL)
 elif st.session_state['current_page'] == "TCO":
-    st.markdown('<div class="app-title">Total Cost of Ownership (TCO) & ROI (Wall Finishing) </div>', unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: #1E293B;'>Cost Estimation Calculator (Dampproof Wall)</h4>", unsafe_allow_html=True)
     
     nav_col1, nav_col2 = st.columns(2)
     with nav_col1:
@@ -173,7 +242,7 @@ elif st.session_state['current_page'] == "TCO":
         if st.button("🚪 Quick Logout", use_container_width=True): st.session_state['authenticated'] = False; st.rerun()
     st.markdown("---")
     
-    st.subheader("🏢 Structural Dimensions")
+    st.subheader("🏢 Building Details")
     floor_size = st.number_input("Floor Area (Sq. Ft.)", min_value=100, value=2000, step=100, key="tco_f_sz")
     stories = st.number_input("Number of Stories", min_value=1, value=5, step=1, key="tco_st_n")
     
@@ -185,6 +254,7 @@ elif st.session_state['current_page'] == "TCO":
         sand_price_cft = st.number_input("Sand Price (per CFT)", min_value=10, value=40, step=5, key="tco_s_pr")
     with col_t2:
         initial_paint_sqft = st.number_input("Initial Painting Cost (per Sq. Ft.)", min_value=10, value=35, step=5, key="tco_p_sq")
+        dampproof_price_sqft = st.number_input("Damp proofing Cost (per Sq. Ft.)", min_value=5, value=25, step=5, key="tco_dp_sq")
         failure_years = st.slider("Projected Dampness in (Years)", min_value=2, max_value=12, value=8, key="tco_fail_y")
     
     # Mathematical Modeling Layer
@@ -210,62 +280,93 @@ elif st.session_state['current_page'] == "TCO":
     
     upfront_extra_cost = initial_hwp_total - initial_std_total
     
-    # 1/3 Painting Rework Cost Rule
-    recurring_damage_shock = cost_initial_paint / 3.0
+    # Recurring Repair Costs (1/3 Paint Rework + 1/3 Dampproofing Area Treatment)
+    recurring_paint_cost = cost_initial_paint / 3.0
+    recurring_dampproof_cost = (total_wall_area * dampproof_price_sqft) / 3.0
+    recurring_damage_shock = recurring_paint_cost + recurring_dampproof_cost
     
     lifetime_std_total = initial_std_total + recurring_damage_shock
     lifetime_hwp_total = initial_hwp_total
     
-    net_roi_savings = lifetime_std_total - lifetime_hwp_total
+    total_net_savings = lifetime_std_total - lifetime_hwp_total
     
-    # ROI Percentage calculation against upfront extra investment
-    roi_percentage = (net_roi_savings / initial_hwp_total * 100) if initial_hwp_total > 0 else 0.0
+    # Annualized Savings & Annual ROI Calculations
+    annual_net_savings = total_net_savings / failure_years
+    total_roi_percentage = (total_net_savings / initial_hwp_total * 100) if initial_hwp_total > 0 else 0.0
+    annual_roi_percentage = total_roi_percentage / failure_years
 
-    # 1. Detailed Breakdown Tables
+    # Custom Table Generator
+    def render_custom_table(df):
+        html = '<table class="custom-tco-table"><thead><tr>'
+        for col in df.columns:
+            html += f'<th>{col}</th>'
+        html += '</tr></thead><tbody>'
+        for _, row in df.iterrows():
+            html += '<tr>'
+            for val in row:
+                html += f'td>{val}</td>'
+            html += '</tr>'
+        html += '</tbody></table>'
+        return html.replace('td>', '<td>')
+
+    # Breakdown Tables
     st.markdown("---")
     st.subheader("⚖️ 1. Initial Investment Comparison")
-    initial_comparison_data = {
-        "Cost Element": ["Cement Cost", "Sand Cost", "Painting", "Total Initial Cost"],
-        "Traditional (Local Brand)": [f"BDT {cost_cem_std:,.0f}", f"BDT {cost_sand:,.0f}", f"BDT {cost_initial_paint:,.0f}", f"BDT {initial_std_total:,.0f}"],
-        "Premium (Holcim Premium)": [f"BDT {cost_cem_hwp:,.0f}", f"BDT {cost_sand:,.0f}", f"BDT {cost_initial_paint:,.0f}", f"BDT {initial_hwp_total:,.0f}"],
+    
+    col_std_header = "Traditional<br>(Local Brand)"
+    col_hwp_header = "Premium<br>(Holcim Premium)"
+    
+    initial_comparison_df = pd.DataFrame({
+        "Cost Element": ["Cement Cost", "Sand Cost", "Painting Cost", "Total Initial Cost"],
+        col_std_header: [f"BDT {cost_cem_std:,.0f}", f"BDT {cost_sand:,.0f}", f"BDT {cost_initial_paint:,.0f}", f"BDT {initial_std_total:,.0f}"],
+        col_hwp_header: [f"BDT {cost_cem_hwp:,.0f}", f"BDT {cost_sand:,.0f}", f"BDT {cost_initial_paint:,.0f}", f"BDT {initial_hwp_total:,.0f}"],
         "Premium Extra Cost": [f"+ BDT {upfront_extra_cost:,.0f}", "BDT 0", "BDT 0", f"+ BDT {upfront_extra_cost:,.0f}"]
-    }
-    st.table(pd.DataFrame(initial_comparison_data))
+    })
+    st.markdown(render_custom_table(initial_comparison_df), unsafe_allow_html=True)
 
+    st.markdown("<br>", unsafe_allow_html=True)
     st.subheader(f"⏱️ 2. Lifecycle ROI (Year {failure_years})")
-    lifecycle_data = {
-        "Plan Options": ["Traditional Local Brand Plan", "Holcim Premium Plan"],
+    
+    lifecycle_df = pd.DataFrame({
+        "Plan Options": ["Traditional (Local Brand)", "Holcim Premium Plan"],
         "Initial Cost": [f"BDT {initial_std_total:,.0f}", f"BDT {initial_hwp_total:,.0f}"],
-        "Re-Paint & Damp Repair Cost": [f"BDT {recurring_damage_shock:,.0f}", "BDT 0"],
+        "Re-Painting Cost": [f"BDT {recurring_paint_cost:,.0f}", "BDT 0"],
+        "Dampproofing Cost": [f"BDT {recurring_dampproof_cost:,.0f}", "BDT 0"],
         "Total Lifetime Cost": [f"BDT {lifetime_std_total:,.0f}", f"BDT {lifetime_hwp_total:,.0f}"]
-    }
-    st.table(pd.DataFrame(lifecycle_data))
+    })
+    st.markdown(render_custom_table(lifecycle_df), unsafe_allow_html=True)
+    
+    st.markdown("""
+        <div style="font-size: 12px; color: #475569; margin-top: 8px; margin-bottom: 15px; background-color: #F1F5F9; padding: 10px; border-radius: 8px;">
+            <b>** Note:</b> 1/3 of total paint cost is considered as repainting and 1/3 of surface area damp proofing cost is considered.
+        </div>
+    """, unsafe_allow_html=True)
 
-    # 2. Executive 3-Box Summary Cards
+    # Executive Summary Cards
     st.markdown("---")
-    st.subheader("📈 Summary")
+    st.subheader("📈 Executive Summary")
 
     st.markdown(f"""
-        <div class="tco-card" style="background-color: #F0F9FF; border-left: 5px solid #0284C7;">
+        <div class="tco-card" style="border-left: 6px solid #0284C7;">
             <div class="card-title" style="color: #0369A1;">TOTAL COST OF OWNERSHIP (HOLCIM PREMIUM)</div>
             <div class="card-value" style="color: #0284C7;">BDT {lifetime_hwp_total:,.0f}</div>
             <div class="card-sub">Total initial investment for Holcim Premium plan (Cement + Sand + Paint)</div>
         </div>
         
-        <div class="tco-card" style="background-color: #FEF2F2; border-left: 5px solid #EF4444;">
+        <div class="tco-card" style="border-left: 6px solid #EF4444;">
             <div class="card-title" style="color: #991B1B;">ADDITIONAL COST OF OWNERSHIP (LOCAL BRAND)</div>
             <div class="card-value" style="color: #DC2626;">BDT {recurring_damage_shock:,.0f}</div>
-            <div class="card-sub">Expected recurring dampness damage & repainting cost by Year {failure_years}.<br><b>** Note: 1/3 of total paint cost is considered as recurring dampness repair cost.</b></div>
+            <div class="card-sub">Expected recurring dampness damage & repair cost by Year {failure_years}</div>
         </div>
         
-        <div class="tco-card" style="background-color: #ECFDF5; border-left: 5px solid #10B981;">
-            <div class="card-title" style="color: #065F46;">NET SAVINGS (ROI)</div>
-            <div class="card-value" style="color: #047857;">BDT {net_roi_savings:,.0f} ({roi_percentage:,.1f}%)</div>
-            <div class="card-sub">Net lifetime savings against total Holcim Premium plan investment of BDT {initial_hwp_total:,.0f}</div>
+        <div class="tco-card" style="border-left: 6px solid #10B981; background: linear-gradient(135deg, #FFFFFF 0%, #F0FDF4 100%);">
+            <div class="card-title" style="color: #065F46;">ANNUAL NET SAVINGS (ROI)</div>
+            <div class="card-value" style="color: #047857;">BDT {annual_net_savings:,.0f} / Year ({annual_roi_percentage:,.1f}% / Year)</div>
+            <div class="card-sub">Total lifetime net savings: <b>BDT {total_net_savings:,.0f} ({total_roi_percentage:,.1f}%)</b> over {failure_years} years against total Holcim Premium plan investment of BDT {initial_hwp_total:,.0f}</div>
         </div>
     """, unsafe_allow_html=True)
 
-    # 3. Stacked Comparison Bar Chart
+    # Plotly Chart
     st.markdown("<br>", unsafe_allow_html=True)
     fig = go.Figure()
     fig.add_trace(go.Bar(
@@ -278,7 +379,7 @@ elif st.session_state['current_page'] == "TCO":
     fig.add_trace(go.Bar(
         y=['Traditional Plan', 'Premium Plan'], 
         x=[recurring_damage_shock, 0], 
-        name='1/3 Paint Repair Cost', 
+        name='1/3 Paint & Dampproof Repair Cost', 
         orientation='h', 
         marker=dict(color='#EF4444')
     ))
@@ -293,9 +394,8 @@ elif st.session_state['current_page'] == "TCO":
     )
     st.plotly_chart(fig, use_container_width=True)
 
-    with st.expander("🔍 Deep Technical Engineering Log"):
+    with st.expander("🔍 Plaster and Paints Surface Area"):
         st.markdown(f"""
-        ### Plaster and Paint Surface Areas
         * **Internal Wall Area:** {int_area:,.0f} Sq. Ft. (2.8x floor area per story).
         * **External Wall Area:** {ext_area:,.0f} Sq. Ft. (0.7x floor area per story).
         * **Total Wall Plaster Surface Area:** {total_wall_area:,.0f} Sq. Ft.
@@ -305,7 +405,7 @@ elif st.session_state['current_page'] == "TCO":
 
 # PAGE C: WALL & ROOF PLASTER MATERIAL QUANTIFICATION
 elif st.session_state['current_page'] == "Plaster":
-    st.markdown('<div class="app-title">Wall & Ceiling Plaster Calculator</div>', unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: #1E293B;'>Wall & Ceiling Plaster Calculator</h4>", unsafe_allow_html=True)
     
     nav_col1, nav_col2 = st.columns(2)
     with nav_col1:
@@ -314,7 +414,7 @@ elif st.session_state['current_page'] == "Plaster":
         if st.button("🚪 Quick Logout", use_container_width=True): st.session_state['authenticated'] = False; st.rerun()
     st.markdown("---")
     
-    st.subheader("📋 Design Dimensions & Unit Pricing Inputs")
+    st.subheader("📋 Building Details")
     f_size = st.number_input("Floor Area (Sq. Ft.)", min_value=100, value=2000, step=100, key="pl_f_sz")
     f_stories = st.number_input("Number of Stories", min_value=1, value=5, step=1, key="pl_st_n")
     s_ratio = st.number_input("Cement:Sand Ratio (1:X)", min_value=1.0, value=4.0, step=0.5, key="pl_s_rt")
@@ -351,30 +451,50 @@ elif st.session_state['current_page'] == "Plaster":
     cost_sand_total = total_sand_cft * s_price
     gross_plaster_budget = cost_cement_total + cost_sand_total
     
-    st.markdown(f"""
-        <div class="mobile-metric-card" style="border-left-color: #DC2626;">
-            <div class="metric-label">TOTAL PLASTER MATERIALS REQUIRED</div>
-            <div class="metric-value">{total_plaster_bags:,} Cement Bags</div>
-            <div style="font-size: 13px; color: #4B5563; margin-top: 4px;">Sand Volume: <b>{total_sand_cft:,.1f} CFT</b></div>
-        </div>
-        <div class="mobile-metric-card" style="border-left-color: #10B981;">
-            <div class="metric-label">TOTAL MATERIALS ESTIMATED BUDGET</div>
-            <div class="metric-value">BDT {gross_plaster_budget:,.0f}</div>
-            <div style="font-size: 11px; color: #6B7280; margin-top: 2px;">Cement Share: BDT {cost_cement_total:,.0f} | Sand Share: BDT {cost_sand_total:,.0f}</div>
-        </div>
-    """, unsafe_allow_html=True)
+    # 4-Card Grid
+    row1_col1, row1_col2 = st.columns(2)
+    with row1_col1:
+        st.markdown(f"""
+            <div class="mobile-metric-card" style="border-left-color: #DC2626;">
+                <div class="metric-label">TOTAL CEMENT REQUIRED</div>
+                <div class="metric-value">{total_plaster_bags:,} Bags</div>
+            </div>
+        """, unsafe_allow_html=True)
+    with row1_col2:
+        st.markdown(f"""
+            <div class="mobile-metric-card" style="border-left-color: #2563EB;">
+                <div class="metric-label">TOTAL SAND VOLUME</div>
+                <div class="metric-value">{total_sand_cft:,.1f} CFT</div>
+            </div>
+        """, unsafe_allow_html=True)
 
-    with st.expander("🔍 Complete Material Breakdowns & Calculation Log"):
+    row2_col1, row2_col2 = st.columns(2)
+    with row2_col1:
+        st.markdown(f"""
+            <div class="mobile-metric-card" style="border-left-color: #10B981;">
+                <div class="metric-label">TOTAL CEMENT COST</div>
+                <div class="metric-value">BDT {cost_cement_total:,.0f}</div>
+            </div>
+        """, unsafe_allow_html=True)
+    with row2_col2:
+        st.markdown(f"""
+            <div class="mobile-metric-card" style="border-left-color: #F59E0B;">
+                <div class="metric-label">TOTAL SAND COST</div>
+                <div class="metric-value">BDT {cost_sand_total:,.0f}</div>
+            </div>
+        """, unsafe_allow_html=True)
+
+    with st.expander("🔍 Material Details"):
         plaster_breakdown = {
             "Structural Part": ["Outside Walls Plaster", "Inside Walls Plaster", "Roof Screed Layer", "Total Volumetric Target"],
             "Surface Area Scope": [f"{a_out:,.0f} Sq. Ft.", f"{a_in:,.0f} Sq. Ft.", f"{a_rf:,.0f} Sq. Ft.", f"{a_out+a_in+a_rf:,.0f} Sq. Ft."],
             "Design Thickness": ['0.75 Inches', '0.50 Inches', '0.50 Inches', 'Composite Layout'],
-            "Dry Aggregate Volume": [f"{dry_vol_out:,.1f} CFT", f"{dry_vol_in:,.1f} CFT", f"{dry_vol_rf:,.1f} CFT", f"{total_dry_volume_all:,.1f} CFT"]
+            "Cement Sand Volume": [f"{dry_vol_out:,.1f} CFT", f"{dry_vol_in:,.1f} CFT", f"{dry_vol_rf:,.1f} CFT", f"{total_dry_volume_all:,.1f} CFT"]
         }
         st.table(pd.DataFrame(plaster_breakdown))
         st.markdown(f"""
         ### Material Calculation Details
-        * **Dry Plaster Volume:** Total dry plaster mix required for all areas is {total_dry_volume_all:,.1f} CFT.
+        * **Dry Plaster Volume:** {total_dry_volume_all:,.1f} CFT.
         * **Cement Component:**  {total_cement_cft:,.1f} CFT based on 1 part of the 1:{s_ratio} mix ratio.
         * **Sand Component:** {total_sand_cft:,.1f} CFT based on {s_ratio} parts of the 1:{s_ratio} mix ratio.
         * **Total Plaster Bags Required:** {total_plaster_bags:,} bags.
@@ -382,7 +502,7 @@ elif st.session_state['current_page'] == "Plaster":
 
 # PAGE D: STRUCTURAL ELEMENTS COMPUTATION
 elif st.session_state['current_page'] == "SlabColumn":
-    st.markdown('<div class="app-title">Column/Slab Materials Volume Calculation</div>', unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: #1E293B;'>Column/Slab Materials Volume Calculation</h4>", unsafe_allow_html=True)
     
     nav_col1, nav_col2 = st.columns(2)
     with nav_col1:
@@ -418,20 +538,38 @@ elif st.session_state['current_page'] == "SlabColumn":
         c_bags = math.ceil(c_cement_cft / 1.25)
         total_cement_budget = c_bags * c_price
         
-        st.markdown(f"""
-            <div class="mobile-metric-card">
-                <div class="metric-label">TOTAL COLUMN MATERIALS REQUIRED</div>
-                <div class="metric-value">{c_bags:,} Cement Bags</div>
-                <div style="font-size: 13px; color: #4B5563; margin-top: 4px;">
-                    Sand Target Volume: <b>{c_sand_cft:,.1f} CFT</b><br>
-                    Coarse Aggregate Target Volume: <b>{c_agg_cft:,.1f} CFT</b>
+        # 4-Card Grid
+        col_r1_c1, col_r1_c2 = st.columns(2)
+        with col_r1_c1:
+            st.markdown(f"""
+                <div class="mobile-metric-card" style="border-left-color: #DC2626;">
+                    <div class="metric-label">TOTAL CEMENT REQUIRED</div>
+                    <div class="metric-value">{c_bags:,} Bags</div>
                 </div>
-            </div>
-            <div class="mobile-metric-card" style="border-left-color: #10B981;">
-                <div class="metric-label">TOTAL CEMENT COST</div>
-                <div class="metric-value">BDT {total_cement_budget:,.0f}</div>
-            </div>
-        """, unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
+        with col_r1_c2:
+            st.markdown(f"""
+                <div class="mobile-metric-card" style="border-left-color: #2563EB;">
+                    <div class="metric-label">SAND VOLUME</div>
+                    <div class="metric-value">{c_sand_cft:,.1f} CFT</div>
+                </div>
+            """, unsafe_allow_html=True)
+
+        col_r2_c1, col_r2_c2 = st.columns(2)
+        with col_r2_c1:
+            st.markdown(f"""
+                <div class="mobile-metric-card" style="border-left-color: #F59E0B;">
+                    <div class="metric-label">COARSE AGGREGATE VOLUME</div>
+                    <div class="metric-value">{c_agg_cft:,.1f} CFT</div>
+                </div>
+            """, unsafe_allow_html=True)
+        with col_r2_c2:
+            st.markdown(f"""
+                <div class="mobile-metric-card" style="border-left-color: #10B981;">
+                    <div class="metric-label">TOTAL CEMENT COST</div>
+                    <div class="metric-value">BDT {total_cement_budget:,.0f}</div>
+                </div>
+            """, unsafe_allow_html=True)
         
         with st.expander("🔍 Volumetric Calculations Details"):
             st.markdown(f"""
@@ -439,9 +577,9 @@ elif st.session_state['current_page'] == "SlabColumn":
             * **Wet Volume of Single Column:** Width × Length × Height = {((cw/12.0)*(cl/12.0)*ch):.3f} CFT.
             * **Total Wet Concrete Volume:** Combined volume for {c_num} columns is {c_wet:.2f} CFT.
             * **Total Dry Concrete Volume:** Wet volume multiplied by standard 1.54 concrete shrinkage factor yields {c_dry:.2f} CFT.
-            * **Cement Component:** Calculated as {c_cement_cft:,.1f} CFT based on 1 part of the 1:{csand}:{cagg} mix ratio.
-            * **Sand Component:** Calculated as {c_sand_cft:,.1f} CFT based on {csand} parts of the mix.
-            * **Aggregate Component:** Calculated as {c_agg_cft:,.1f} CFT based on {cagg} parts of the mix.
+            * **Cement Component:**  {c_cement_cft:,.1f} CFT based on 1 part of the 1:{csand}:{cagg} mix ratio.
+            * **Sand Component:** {c_sand_cft:,.1f} CFT based on {csand} parts of the mix.
+            * **Aggregate Component:** {c_agg_cft:,.1f} CFT based on {cagg} parts of the mix.
             """)
 
     elif el_choice == "Slab & Beam":
@@ -470,20 +608,38 @@ elif st.session_state['current_page'] == "SlabColumn":
         s_bags = math.ceil(s_cement_cft / 1.25)
         total_slab_cement_budget = s_bags * s_price
         
-        st.markdown(f"""
-            <div class="mobile-metric-card" style="border-left-color: #10B981;">
-                <div class="metric-label">TOTAL SLAB & BEAM MATERIALS REQUIRED</div>
-                <div class="metric-value">{s_bags:,} Cement Bags</div>
-                <div style="font-size: 13px; color: #4B5563; margin-top: 4px;">
-                    Sand Volume: <b>{s_sand_cft:,.1f} CFT</b><br>
-                    Coarse Aggregate Volume: <b>{s_agg_cft:,.1f} CFT</b>
+        # 4-Card Grid
+        sb_r1_c1, sb_r1_c2 = st.columns(2)
+        with sb_r1_c1:
+            st.markdown(f"""
+                <div class="mobile-metric-card" style="border-left-color: #DC2626;">
+                    <div class="metric-label">TOTAL CEMENT REQUIRED</div>
+                    <div class="metric-value">{s_bags:,} Bags</div>
                 </div>
-            </div>
-            <div class="mobile-metric-card" style="border-left-color: #2563EB;">
-                <div class="metric-label">TOTAL CEMENT COST</div>
-                <div class="metric-value">BDT {total_slab_cement_budget:,.0f}</div>
-            </div>
-        """, unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
+        with sb_r1_c2:
+            st.markdown(f"""
+                <div class="mobile-metric-card" style="border-left-color: #2563EB;">
+                    <div class="metric-label">SAND VOLUME</div>
+                    <div class="metric-value">{s_sand_cft:,.1f} CFT</div>
+                </div>
+            """, unsafe_allow_html=True)
+
+        sb_r2_c1, sb_r2_c2 = st.columns(2)
+        with sb_r2_c1:
+            st.markdown(f"""
+                <div class="mobile-metric-card" style="border-left-color: #F59E0B;">
+                    <div class="metric-label">COARSE AGGREGATE VOLUME</div>
+                    <div class="metric-value">{s_agg_cft:,.1f} CFT</div>
+                </div>
+            """, unsafe_allow_html=True)
+        with sb_r2_c2:
+            st.markdown(f"""
+                <div class="mobile-metric-card" style="border-left-color: #10B981;">
+                    <div class="metric-label">TOTAL CEMENT COST</div>
+                    <div class="metric-value">BDT {total_slab_cement_budget:,.0f}</div>
+                </div>
+            """, unsafe_allow_html=True)
         
         with st.expander("🔍 Volumetric Calculations Details"):
             st.markdown(f"""
@@ -499,9 +655,9 @@ elif st.session_state['current_page'] == "SlabColumn":
 # --- GLOBAL SYSTEM FOOTER BANNER ---
 st.markdown(f"""
     <div class="dev-footer">
-        <span style="font-size: 10px; color: #6B7280; font-weight: bold; letter-spacing: 0.5px;">SYSTEM DEVELOPER & MAINTENANCE</span><br>
-        <span style="font-size: 14px; font-weight: 700; color: #111827;">MD Abdullah Al Naim</span><br>
-        <span style="font-size: 11px; color: #4B5563;">Assistant Engineer</span><br>
-        <span style="font-size: 11px; color: #4B5563; font-style: italic;">LafargeHolcim Bangladesh PLC</span>
+        <span style="font-size: 10px; color: #64748B; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase;">SYSTEM DEVELOPER & MAINTENANCE</span><br>
+        <span style="font-size: 15px; font-weight: 800; color: #0F172A;">MD Abdullah Al Naim</span><br>
+        <span style="font-size: 12px; color: #475569; font-weight: 500;">Assistant Engineer</span><br>
+        <span style="font-size: 12px; color: #DC2626; font-weight: 600;">LafargeHolcim Bangladesh PLC</span>
     </div>
 """, unsafe_allow_html=True)
